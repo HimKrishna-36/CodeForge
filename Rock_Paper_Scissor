@@ -1,0 +1,52 @@
+import random
+import pyttsx3  # Import text-to-speech library
+
+# Initialize text-to-speech engine
+engine = pyttsx3.init()
+
+
+engine.say("Can you please tell me your name:")
+engine.runAndWait()
+name = input("Can you please tell me your name:")
+
+
+computer = random.choice([1,0,-1])
+engine.say("Now! Enter you choice")
+engine.runAndWait()
+youstr = input("Enter your choice ")
+youDict = {"s":1, "p":-1, "r":0}
+reverseDict = {1:"Scissor", -1:"Paper", 0:"Rock"}
+you = youDict[youstr]
+
+engine.say(f"You chose{reverseDict[you]}\nComputer chose{reverseDict[computer]}")
+engine.runAndWait()
+print(f"You chose{reverseDict[you]}\nComputer chose{reverseDict[computer]}")
+
+if(computer == you):
+ result = f"It is a Draw, {name}"
+else:
+ if(computer == -1 and you == 1):
+  result = f"Congratulations! You win, {name}"
+ elif(computer == -1 and you == 0):
+  result = f"Congratulations! You win, {name}"
+
+ elif(computer == 1 and you == -1):
+  result = f"Ohhh! You loss, {name}"
+  engine.setProperty("rate", 120)  # Slow down speech for sadness
+  engine.setProperty("volume", 0.7)  # Lower volume a little
+  engine.setProperty("voice", "english")  # You can change voice properties
+ elif(computer == 1 and you == 0):
+  result = f"Congratulations! You win, {name}"
+ elif(computer == 0 and you == -1):
+  result = f"Congratulations! You win, {name}"
+
+ elif(computer == 0 and you == 1):
+  result = f"Ohhh! You loss, {name}"
+  engine.setProperty("rate", 120)  # Slow down speech for sadness
+  engine.setProperty("volume", 0.7)  # Lower volume a little
+  engine.setProperty("voice", "english")  # You can change voice properties
+ else:
+  result = f"Something went wrong, {name}"
+
+engine.say(result)
+engine.runAndWait()
